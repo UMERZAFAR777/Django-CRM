@@ -2,7 +2,7 @@ from typing import Any
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-
+from website.models import Record
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -34,9 +34,17 @@ class SignUpForm(UserCreationForm):
 
 
 
+class AddRecordForm (forms.ModelForm):
+    first_name = forms.CharField(max_length=50,label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
+    last_name = forms.CharField(max_length=50,label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
+    email = forms.CharField(max_length=50,label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
+    phone = forms.CharField(max_length=50,label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Phone'}))
+    city = forms.CharField(max_length=50,label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'City'}))
 
 
-
+    class Meta:
+        model = Record
+        exclude = ('user',)
 
 
 

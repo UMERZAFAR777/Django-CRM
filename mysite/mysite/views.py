@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect,render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm,AddRecordForm
 from website.models import Record
 def home(request):
     records = Record.objects.all()
@@ -62,7 +62,19 @@ def delete_user(request,pk):
         messages.success(request,'You have to login first......')
         return redirect ('home')     
     
-
+def addrecord(request):
+    form = AddRecordForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Profile is added')
+                return redirect ('home')
+        else:    
+            return render (request,'addrecord.html',{'form':form})
+    else:    
+        messages.success(request,'You have to login first......')
+        return redirect ('home')  
 
 
 
