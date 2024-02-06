@@ -25,7 +25,7 @@ urlpatterns = [
     path('record/<int:pk>',views.record_user,name='record'),
     path('delete/<int:pk>',views.delete_user,name='delete'),
     path('addrecord/',views.addrecord,name='addrecord'),
-    
+    path('updaterecord/<int:pk>',views.updaterecord_user,name='updaterecord'),
 
 
 ]

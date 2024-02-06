@@ -5,20 +5,21 @@
 <div class="col-md-6 offset-md-3">
     <h1>Customer Record</h1>
 
-    {{customer_record.first_name}}
-    <br>
+    Name = {{customer_record.first_name}}
+    
     {{customer_record.last_name}}
     <br>
-    {{customer_record.email}}
+    Email = {{customer_record.email}}
     <br>
-    {{customer_record.phone}}
+    Phone = {{customer_record.phone}}
     <br>
-    {{customer_record.city}}
+    City = {{customer_record.city}}
     <br>
     <br>
     <div>
         <button type="submit"><a href="{% url 'home' %}">Back</a></button>
         <button type="submit"><a href="{% url 'delete' customer_record.id %}">Delete</a></button>
+        <button type="submit"><a href="{% url 'updaterecord' customer_record.id %}">Update Record</a></button>
 
 
     </div>

@@ -77,4 +77,21 @@ def addrecord(request):
         return redirect ('home')  
 
 
+def updaterecord_user(request,pk):
+    if request.user.is_authenticated:
+        current_record = Record.objects.get(id = pk)
+        form = AddRecordForm(request.POST or None ,instance=current_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Profile is updated')
+            return redirect ('home')
+        return render (request,'updaterecord.html',{'form':form})
+    else:
+        messages.success(request,'You have to login first......')
+        return redirect ('home') 
+
+
+
+
+
 
