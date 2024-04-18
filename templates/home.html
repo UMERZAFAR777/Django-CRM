@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<br>
+<div class="col-md-6 offset-md-3">
+<h1>
+    Record...
+</h1>
+<br>
+<table class="table table-striped table-hover">
+    <tr">
+        <th class="col">ID</th>
+        <th class="col">NAME</th>
+        <th class="col">EMAIL</th>
+        <th class="col">PHONE</th>
+        <th class="col">CITY</th>
+    </tr>
+    
+    {% if records %}
+        {% for record in records %}
+        <tr>
+           <td><a href="{% url 'record' record.id %}">{{record.id}}</a></td>
+           <td>{{record.first_name}}
+            {{record.last_name}}</td>
+            <td>{{record.email}}</td>
+            <td>{{record.phone}}</td>
+            <td>{{record.city}}</td>
+            
+        </tr>
+        {% endfor %}
+    {% endif %} 
+</table>       
+</div>
+
+{% else %}
+<div class="col-md-6 offset-md-3">
+    <h1>
+        Login
+    </h1>
+    <br>
+<form method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
