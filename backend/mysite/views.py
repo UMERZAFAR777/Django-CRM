@@ -5,6 +5,10 @@ from django.contrib import messages
 from django.contrib.messages import *
 from django.contrib.auth.models import User
 from student.models import Student
+from django.contrib.auth.decorators import login_required
+
+
+
 def index(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -33,10 +37,10 @@ def register(request):
 
 
 def logout_user(request):
-    logout(request,)
-    messages.success(request,'You have been logged out.....!')
-    return redirect ('index')
-
+    print("Logout function called.")  # Debugging line
+    logout(request)
+    messages.success(request, 'You have been logged out.')
+    return redirect('index')
 
 def register(request):
     if request.method == "POST":
@@ -60,7 +64,7 @@ def register(request):
     return render (request,'register.html')    
 
 
-
+@login_required(login_url = '/index')
 def home(request):
     student = Student.objects.all()
     data = {
