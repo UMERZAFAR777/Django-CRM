@@ -171,13 +171,12 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 
-SOCIALACCOUNT_AUTO_SIGNUP = True  # Optional, already True by default
+SOCIALACCOUNT_AUTO_SIGNUP = True 
 
-# Link social login to existing account if emails match
 SOCIALACCOUNT_ADAPTER = 'mysite.adapters.MySocialAccountAdapter'
 
 ACCOUNT_EMAIL_REQUIRED = True
-
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_UNIQUE_EMAIL = True
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
