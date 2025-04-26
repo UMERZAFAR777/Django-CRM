@@ -28,7 +28,7 @@ def login_user(request):
         else:
             messages.error(request, 'There was an error in Email / Username or Password')
 
-    return render(request, 'login.html',{'user':request.user})
+    return render(request, 'registration/login.html',{'user':request.user})
 
 
 def register(request):

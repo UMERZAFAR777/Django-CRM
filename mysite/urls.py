@@ -22,7 +22,9 @@ from mysite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.login_user, name='login'),         
+    path('', views.login_user, name='login'),
+    path('login/', views.login_user, name='login'),
+         
     path('logout', views.logout_user, name='logout'),         
     
     path('register/', views.register, name='register'),
@@ -33,6 +35,11 @@ urlpatterns = [
     path('addrecord',views.addrecord,name='addrecord'),
     path('delete/<pk>',views.delete,name='delete'),
     path('editrecord/<pk>',views.editrecord,name='editrecord'),
+
+
+    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
 urlpatterns += static (
     settings.MEDIA_URL , document_root = settings.MEDIA_ROOT

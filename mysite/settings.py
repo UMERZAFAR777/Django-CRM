@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'record',
+    'allauth',
+    'allauth.account',
+
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -62,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -134,12 +141,51 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
+AUTHENTICATION_BACKENDS = [
+    
+    'django.contrib.auth.backends.ModelBackend',
+
+ 
+    'allauth.account.auth_backends.AuthenticationBackend',
+ 
+]
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+       
+        'APP': {
+            'client_id': os.environ.get('client_id'),
+            'secret': os.environ.get('secret'),
+            'key': ''
+        }
+    }
+}
+
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/home/' 
+LOGOUT_REDIRECT_URL = '/'
+ 
 
 
 
+SOCIALACCOUNT_AUTO_SIGNUP = True  # Optional, already True by default
+
+# Link social login to existing account if emails match
+SOCIALACCOUNT_ADAPTER = 'mysite.adapters.MySocialAccountAdapter'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_UNIQUE_EMAIL = True
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
-
-
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # agar window new ki tu edr sy dahk lena
 # SECRET_KEY = 'django-insecure-of-_g(#g6e8(k)s(aoc0e06_+6ae+xrjn7su@_425#dgelr2qy'

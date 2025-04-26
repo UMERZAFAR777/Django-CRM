@@ -1,0 +1,38 @@
+<!-- mysite/templates/account/socialaccount/login.html -->
+{% extends "account/base.html" %}
+
+{% block content %}
+<div class="google-login-container">
+    <h2>Sign in</h2>
+    <p>You are about to sign in using a third-party account from Google.</p>
+    <a href="{% provider_login_url 'google' %}" class="google-btn">
+        <i class="fab fa-google"></i> Continue with Google
+    </a>
+</div>
+
+<style>
+    .google-login-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .google-btn {
+        background-color: #4285f4;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    .google-btn:hover {
+        background-color: #357ae8;
+    }
+</style>
+{% endblock %}
